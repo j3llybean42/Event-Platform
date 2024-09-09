@@ -1,1 +1,1 @@
-# Event-Planner
+Events Platform
