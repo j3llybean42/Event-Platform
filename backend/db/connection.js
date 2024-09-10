@@ -1,4 +1,5 @@
-import pg from 'pg'
+// import pg from 'pg'
+const pg = require("pg")
 const { Pool } = pg
 
 require('dotenv').config({path: `${__dirname}/../.env.production`});
@@ -14,5 +15,5 @@ const pool = new Pool({
 if (!process.env.DB_NAME) {
     throw new Error('DATABASE not set')
 }
- 
-export const query = (text, params) => pool.query(text, params)
+
+module.exports = pool
