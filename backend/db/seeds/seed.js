@@ -18,7 +18,7 @@ const seed = ({ eventData, staffData }) => {
       const usersTablePromise = db.query(`
         CREATE TABLE users (
             user_email VARCHAR UNIQUE NOT NULL,
-            events_by_id INT []
+            events_by_id INT [] DEFAULT ARRAY[]::INT[]
         );`);
 
       const staffTablePromise = db.query(`
@@ -45,9 +45,9 @@ const seed = ({ eventData, staffData }) => {
            event_date_time TIMESTAMP NOT NULL,
            event_type VARCHAR NOT NULL REFERENCES types(type_name),
            event_description VARCHAR NOT NULL,
-           isFree BOOLEAN DEFAULT TRUE,
+           isFree BOOLEAN NOT NULL,
            attendee_count INT DEFAULT 0,
-           max_attendees INT DEFAULT 30
+           max_attendees INT NOT NULL
         );`);
 
       return Promise.all([eventsTablePromise]);
@@ -58,7 +58,6 @@ const seed = ({ eventData, staffData }) => {
         staffData.map(({ staff_email }) => [staff_email])
       );
       const staffPromise = db.query(insertStaffQueryStr);
-
       const insertTypesQueryStr = format(
         "INSERT INTO types (type_name) VALUES %L",
         typesData.map(({ type_name }) => [type_name])
@@ -66,8 +65,8 @@ const seed = ({ eventData, staffData }) => {
       const typesPromise = db.query(insertTypesQueryStr);
 
       const insertUsersQueryStr = format(
-        "INSERT INTO users (user_email, events_by_id) VALUES %L",
-        usersData.map(({ user_email, events_by_id }) => [user_email, events_by_id])
+        "INSERT INTO users (user_email) VALUES %L",
+        usersData.map(({ user_email }) => [user_email])
       );
       const usersPromise = db.query(insertUsersQueryStr)
 
@@ -75,7 +74,7 @@ const seed = ({ eventData, staffData }) => {
     })
     .then(() => {
       const insertEventsQueryStr = format(
-        "INSERT INTO events (event_name, event_date_time, event_type, event_description, isFree) VALUES %L",
+        "INSERT INTO events (event_name, event_date_time, event_type, event_description, isFree, attendee_count, max_attendees) VALUES %L",
         eventData.map(
           ({
             event_name,

@@ -16,3 +16,12 @@ exports.fetchUsersEmail = (email) => {
             return user
         })
 }
+
+exports.insertUser = (newUser) => {
+    const {user_email} = newUser
+    if(user_email === undefined || user_email === ""){
+        return Promise.reject({status: 400, msg: "Bad Request - missing email address"})
+    }
+    return db.query(`INSERT INTO users (user_email) VALUES ($1) RETURNING *`, [user_email])
+    .then((result) => result.rows)
+}
