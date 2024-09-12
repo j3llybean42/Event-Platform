@@ -64,3 +64,25 @@ exports.insertEvent = (newEvent) => {
     .then((result) => result.rows);
 };
 
+exports.selectEventById = (event_id) => {
+  return db.query(`SELECT events.* FROM events WHERE events.event_id = $1`, [event_id])
+  .then((result) => {
+    const event = result.rows[0]
+    if(!event){
+      return Promise.reject({status: 404, msg: "Event not found"})
+    }
+    return event
+  })
+}
+
+exports.updateEventById = (event_id, inc_attendees) => {
+  let queryParams = [event_id, inc_attendees]
+  if(typeof inc_attendees !== "number"){
+    return Promise.reject({status:400, msg: "Attendee number not given"})
+  }
+  return db.query(`UPDATE events 
+    SET attendee_count = attendee_count + $2
+    WHERE event_id = $1
+    RETURNING *`, queryParams)
+    .then((result) => result.rows[0])
+}

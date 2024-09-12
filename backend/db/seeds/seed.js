@@ -17,8 +17,9 @@ const seed = ({ eventData, staffData }) => {
     .then(() => {
       const usersTablePromise = db.query(`
         CREATE TABLE users (
-            user_email VARCHAR UNIQUE NOT NULL,
-            events_by_id INT [] DEFAULT ARRAY[]::INT[]
+          user_id SERIAL PRIMARY KEY,
+          user_email VARCHAR UNIQUE NOT NULL,
+          events_by_id INT [] DEFAULT ARRAY[]::INT[]
         );`);
 
       const staffTablePromise = db.query(`
@@ -68,7 +69,7 @@ const seed = ({ eventData, staffData }) => {
         "INSERT INTO users (user_email) VALUES %L",
         usersData.map(({ user_email }) => [user_email])
       );
-      const usersPromise = db.query(insertUsersQueryStr)
+      const usersPromise = db.query(insertUsersQueryStr);
 
       return Promise.all([staffPromise, typesPromise, usersPromise]);
     })
