@@ -2,7 +2,7 @@
 const pg = require("pg")
 const { Pool } = pg
 
-require('dotenv').config({path: `${__dirname}/../.env.production`});
+require('dotenv').config({path: `${__dirname}/../.env.dev`});
 
 const pool = new Pool({
     user: process.env.DB_USER,

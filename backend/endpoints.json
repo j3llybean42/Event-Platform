@@ -1,11 +1,182 @@
 {
-    "GET /api": {
+  "GET /api": {
     "description": "serves up a json representation of all the available endpoints of the api",
     "queries": [],
     "exampleRequestBody": {},
     "exampleResponse": {
       "GET /api": {
         "description": "serves up a json representation of all the available endpoints of the api"
+      }
+    }
+  },
+  "GET /api/events": {
+    "description": "serves an array of all events",
+    "queries": ["type", "order"],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "events": [
+        {
+          "event_id": 6,
+          "event_name": "Book Club",
+          "event_date_time": "2024-10-03T18:00:00.000Z",
+          "event_type": "general",
+          "event_description": "Monthly book club - join us on the first Wednesday of every month to discover new books and share your thoughts with fellow bookworms! Finishes at 9pm.",
+          "isfree": false,
+          "attendee_count": 0,
+          "max_attendees": 10
+        }
+      ]
+    }
+  },
+  "GET /events/:event_id": {
+    "description": "serves an event object with the corresponding event_id",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "event": {
+        "event_id": 4,
+        "event_name": "Board Game Night",
+        "event_date_time": "2024-10-16T18:00:00.000Z",
+        "event_type": "games",
+        "event_description": "Our monthly board games night, with a variety of games to suit everyone! Finishes at 8:30pm.",
+        "isfree": false,
+        "attendee_count": 0,
+        "max_attendees": 30
+      }
+    }
+  },
+  "POST /api/events": {
+    "description": "posts an event to the database and returns an object of the event information",
+    "queries": [],
+    "exampleRequestBody": {
+      "event_name": "example event",
+      "event_date_time": "2024-09-12 14:00:00",
+      "event_type": "general",
+      "event_description": "this is an example",
+      "isFree": true,
+      "max_attendees": 15
+    },
+    "exampleResponse": {
+      "event": [
+        {
+          "event_id": 8,
+          "event_name": "example event",
+          "event_date_time": "2024-09-12T13:00:00.000Z",
+          "event_type": "general",
+          "event_description": "this is an example",
+          "isfree": true,
+          "attendee_count": 0,
+          "max_attendees": 15
+        }
+      ]
+    }
+  },
+  "PATCH /api/events/:event_id": {
+    "description": "updates the attendee_count property on an event and returns an object of the updated event",
+    "queries": [],
+    "exampleRequestBody": { "inc_attendees": 3 },
+    "exampleResponse": {
+      "event_id": 4,
+      "event_name": "Board Game Night",
+      "event_date_time": "2024-10-16T18:00:00.000Z",
+      "event_type": "games",
+      "event_description": "Our monthly board games night, with a variety of games to suit everyone! Finishes at 8:30pm.",
+      "isfree": false,
+      "attendee_count": 3,
+      "max_attendees": 30
+    }
+  },
+  "GET /api/staff": {
+    "description": "serves an array of all staff",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "staff": [
+        {
+          "staff_email": "ashemarsh42@gmail.com"
+        }
+      ]
+    }
+  },
+  "GET /api/staff/:email": {
+    "description": "serves an object of a staff member with requested email address",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "staffMember": {
+        "staff_email": "ashemarsh42@gmail.com"
+      }
+    }
+  },
+  "GET /api/types": {
+    "description": "serves an array of all event types",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "types": [
+        {
+          "type_name": "children's"
+        },
+        {
+          "type_name": "games"
+        },
+        {
+          "type_name": "general"
+        }
+      ]
+    }
+  },
+  "GET /api/users/:email": {
+    "description": "serves an object of a user with requested email address",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "user": {
+        "user_id": 1,
+        "user_email": "example-user@email.com",
+        "events_by_id": []
+      }
+    }
+  },
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleRequestBody": {},
+    "exampleResponse": {
+      "users": [
+        {
+          "user_id": 1,
+          "user_email": "example-user@email.com",
+          "events_by_id": []
+        }
+      ]
+    }
+  },
+  "POST /api/users": {
+    "description": "posts a user to the database and returns an object of the user information",
+    "queries": [],
+    "exampleRequestBody": {"user_email": "new-user@example.com"},
+    "exampleResponse": {
+      "user": [
+        {
+          "user_id": 2,
+          "user_email": "new-user@example.com",
+          "events_by_id": []
+        }
+      ]
+    }
+  },
+  "PATCH /api/users/:user_id": {
+    "description": "updates the events_by_id array property on a user and returns an object of the updated user",
+    "queries": [],
+    "exampleRequestBody": { "inc_attendees": 3 },
+    "exampleResponse": {
+      "user": {
+        "user_id": 1,
+        "user_email": "example-user@email.com",
+        "events_by_id": [
+          3
+        ]
       }
     }
   }
