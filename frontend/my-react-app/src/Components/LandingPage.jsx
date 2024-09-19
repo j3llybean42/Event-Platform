@@ -1,12 +1,12 @@
-import { GoogleLogin } from "@react-oauth/google";
+import LoginButton from "./LoginButton";
 
-export function LandingPage() {
+
+export default function LandingPage() {
   return (
     <>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => console.log(credentialResponse)}
-        onError={() => console.log("Login Failed")}
-      />
+    <h1>Welcome to the Bookstore Events webapp!</h1>
+    <h2>Log in with google to get started</h2>
+      <LoginButton/>
     </>
   );
 }

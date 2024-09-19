@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useContext, useEffect } from "react";
+import "./App.css";
+import Header from "./Components/Header";
+import Manager from "./Components/Manager";
+import { UserContext } from "./contexts/UserContext";
+import { getStaff } from "./utils.js";
+import { StaffContext } from "./contexts/StaffContext.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {googleUser} = useContext(UserContext)
+  const {isStaff, setIsStaff} = useContext(StaffContext)
+  const [staffList, setStaffList] = useState([]);
+
+  const getStaffDetails = async () => {
+    const data = await getStaff()
+    const { staff } = data;
+        const staffDetails = staff.map((element) => {
+          return element.staff_email
+        })
+        setStaffList((staffList) => staffList = staffDetails)
+  }
+
+  useEffect(() => {
+    getStaffDetails()
+      .then(() => {
+        if (staffList.includes(googleUser)) {
+          setIsStaff((isStaff) => (isStaff = true));
+        }
+      })
+  }, [googleUser, isStaff])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <Manager />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
