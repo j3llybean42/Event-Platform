@@ -2,32 +2,30 @@ import { useState, useContext, useEffect } from "react";
 import "./App.css";
 import Header from "./Components/Header";
 import Manager from "./Components/Manager";
-import { UserContext } from "./contexts/UserContext";
 import { getStaff } from "./utils.js";
 import { StaffContext } from "./contexts/StaffContext.jsx";
 
 function App() {
-  const {googleUser} = useContext(UserContext)
   const {isStaff, setIsStaff} = useContext(StaffContext)
   const [staffList, setStaffList] = useState([]);
 
-  const getStaffDetails = async () => {
-    const data = await getStaff()
-    const { staff } = data;
-        const staffDetails = staff.map((element) => {
-          return element.staff_email
-        })
-        setStaffList((staffList) => staffList = staffDetails)
-  }
+  // const getStaffDetails = async () => {
+  //   const data = await getStaff()
+  //   const { staff } = data;
+  //       const staffDetails = staff.map((element) => {
+  //         return element.staff_email
+  //       })
+  //       setStaffList((staffList) => staffList = staffDetails)
+  // }
 
-  useEffect(() => {
-    getStaffDetails()
-      .then(() => {
-        if (staffList.includes(googleUser)) {
-          setIsStaff((isStaff) => (isStaff = true));
-        }
-      })
-  }, [googleUser, isStaff])
+  // useEffect(() => {
+  //   getStaffDetails()
+  //     .then(() => {
+  //       if (staffList.includes()) {
+  //         setIsStaff(true);
+  //       }
+  //     })
+  // }, [, isStaff])
 
   return (
     <>

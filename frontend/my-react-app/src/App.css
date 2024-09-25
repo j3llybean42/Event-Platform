@@ -5,28 +5,19 @@
   text-align: center;
 }
 
-.btn-container {
-  display: flex;
-  justify-content: center;
+body{
+  background-color: #8a8e75;
 }
 
-.btn-primary {
-  background-color: #1e293b;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  display: inline-block;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+h1{
+  color: #242715;
 }
 
-.btn-primary:hover {
-  background-color: #334155;
+h2{
+  color:#2d2f22
 }
+
+h5{
+  color: #2d2f22;
+}
+
