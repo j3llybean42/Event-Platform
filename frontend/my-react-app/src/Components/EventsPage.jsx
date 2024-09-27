@@ -8,7 +8,6 @@ import { Button } from "@mui/material"
 export default function EventsPage({eventsList, setEventsList}){
     const {isStaff} = useContext(StaffContext)
     
-
     useEffect(() => {
         getEvents().then((data) => {
             const {events} = data

@@ -3,10 +3,12 @@ import { LoadingButton } from "@mui/lab"
 import { patchStaffPassword } from "../utils";
 import { useContext, useState } from "react";
 import { StaffContext } from "../contexts/StaffContext";
+import { useNavigate } from "react-router-dom";
 
 export default function StaffChangePassword({passwordInput, handlePasswordInput, staffDetails, isSubmitted, setIsSubmitted}){
     const {isStaff, setIsStaff} = useContext(StaffContext)
     const [success, setSuccess] = useState(false)
+    const navigate = useNavigate()
 
     function handleNewPasswordSubmit(){
         if(!passwordInput.length){
@@ -18,6 +20,11 @@ export default function StaffChangePassword({passwordInput, handlePasswordInput,
             setIsStaff(true)
             setIsSubmitted(true)
             setSuccess(true)
+        }).then(()=>{
+            if(success){
+              navigate("/events")  
+            }
+            
         }).catch((err) => {
             setIsStaff(false)
             setIsSubmitted(false)
@@ -28,10 +35,10 @@ export default function StaffChangePassword({passwordInput, handlePasswordInput,
     return(
         <>
             <Typography variant="subtitle1">Since it's your first time logging in, you must change your password before continuing.</Typography>
-            <TextField placeholder="Staff Password"
+            <TextField placeholder="New Password"
                 type="password"
-                id="staff_password"
-                label="Staff Password"
+                id="new_password"
+                label="New Password"
                 sx={{width: 500, paddingBottom: 2}}
                 variant="outlined"
                 required

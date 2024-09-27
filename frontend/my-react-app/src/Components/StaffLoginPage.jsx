@@ -15,6 +15,7 @@ export default function StaffLoginPage() {
   const [error, setError] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [firstLogin, setFirstLogin] = useState(false);
+  
 
   function handleEmailInput(input) {
     setEmailInput(input);
@@ -31,14 +32,13 @@ export default function StaffLoginPage() {
     }
     getStaffEmail(emailInput)
       .then((data) => {
-        const { staff } = data;
-        setStaffDetails(staff);
-      })
-      .then(() => {
-        if (staffDetails.staffPassword === "password") {
+        const { staffMember } = data;
+        console.log(staffMember, "<-staff")
+        setStaffDetails(staffMember);
+        if (staffMember.staff_password === "password") {
           setFirstLogin(true);
         }
-      });
+      })
   }
 
   function handleSubmit() {
@@ -58,6 +58,7 @@ export default function StaffLoginPage() {
     console.log(signInObject);
     getStaffPassword(emailInput, { params: signInObject })
       .then((data) => {
+        console.log(data)
         const { staff_id } = data;
         console.log(staff_id, "<-- data");
         if (staff_id) {
@@ -92,7 +93,7 @@ export default function StaffLoginPage() {
             value={emailInput}
           />
           <Button variant="contained" onClick={handleEmailSubmit}>
-            Next
+            Verify Email
           </Button>
           <br />
           {firstLogin ? (

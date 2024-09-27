@@ -31,5 +31,5 @@ export function getStaffEmail(staff_email){
 }
 
 export function patchStaffPassword(staff_id, request){
-    return bookstoreAPI.get(`/staff/${staff_id}`, request)
+    return bookstoreAPI.patch(`/staff/${staff_id}`, request)
 }

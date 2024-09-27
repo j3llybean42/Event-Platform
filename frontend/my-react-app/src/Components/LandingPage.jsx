@@ -1,14 +1,12 @@
-import { Typography } from "@mui/material";
-import StaffLoginButton from "./StaffLoginButton";
-import ViewEventsButton from "./ViewEventsButton";
-
+import { Button } from "@mui/material";
+import GoogleIcon from '@mui/icons-material/Google';
 
 export default function LandingPage() {
+
   return (
     <>
     <h1>Welcome!</h1>
-    <ViewEventsButton/> 
-    <StaffLoginButton/>
+    <Button variant="contained" href="/login" startIcon={<GoogleIcon/>}>Login to get started</Button>
     </>
   );
 }
