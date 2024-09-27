@@ -24,8 +24,9 @@ const seed = ({ eventData, staffData }) => {
 
       const staffTablePromise = db.query(`
         CREATE TABLE staff (
+        staff_id SERIAL PRIMARY KEY,
         staff_email VARCHAR UNIQUE NOT NULL,
-        staff_password VARCHAR(20) NOT NULL
+        staff_password VARCHAR NOT NULL
         );`);
 
       const typesTablePromise = db.query(`
@@ -56,7 +57,7 @@ const seed = ({ eventData, staffData }) => {
     })
     .then(() => {
       const insertStaffQueryStr = format(
-        "INSERT INTO staff (staff_email) VALUES %L",
+        "INSERT INTO staff (staff_email, staff_password) VALUES %L",
         staffData.map(({ staff_email, staff_password }) => [staff_email, staff_password])
       );
       const staffPromise = db.query(insertStaffQueryStr);
