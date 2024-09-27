@@ -38,6 +38,7 @@ export default function StaffLoginPage() {
         console.log(signInObject)
         getStaffPassword(emailInput, {params: signInObject}).then((data) => {
             const {staff_id} = data
+            console.log(staff_id, "<-- data")
             if(staff_id){
                 setIsStaff(true)
                 console.log(isStaff)
