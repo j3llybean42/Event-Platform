@@ -6,7 +6,7 @@ export default function LoginButton(){
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     return(
-        <div className="btn-container">
+        <div>
         </div>
     )
 
