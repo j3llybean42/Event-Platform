@@ -18,8 +18,8 @@ export function postEvent(request){
     return bookstoreAPI.post("/events", request)
 }
 
-export function getStaffPassword(staff_email, request){
-    return bookstoreAPI.get(`/staff/${staff_email}`, request).then((response) => {
+export function getStaffPassword(staff_email, params){
+    return bookstoreAPI.get(`/staff/${staff_email}`, params).then((response) => {
         return response.data
     })
 }

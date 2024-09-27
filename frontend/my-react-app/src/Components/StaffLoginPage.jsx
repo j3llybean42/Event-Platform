@@ -35,7 +35,8 @@ export default function StaffLoginPage() {
         const signInObject = {
             input_password: passwordInput
         }
-        getStaffPassword(emailInput, signInObject).then((data) => {
+        console.log(signInObject)
+        getStaffPassword(emailInput, {params: signInObject}).then((data) => {
             const {staff_id} = data
             if(staff_id){
                 setIsStaff(true)
@@ -50,7 +51,7 @@ export default function StaffLoginPage() {
 
     return(
         <>
-        <Typography variant="h5">Staff Login</Typography>
+        <Typography variant="h5" sx={{paddingBottom: 2}}>Staff Login</Typography>
         <Card>
             <Box  sx={{width: 600}} component="form">
                 <br/>
