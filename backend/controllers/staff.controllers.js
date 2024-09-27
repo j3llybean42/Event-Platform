@@ -31,7 +31,7 @@ exports.patchStaffPassword = (req, res, next) => {
 }
 
 exports.getStaffPassword = (req, res, next) => {
-  const {input_password}  = req.body
+  const {input_password}  = req.query
   const staff_email = req.params.staff_email
   const staffExistsQuery = checkStaffEmailExists(staff_email)
   const getPasswordQuery = checkStaffPassword(staff_email, input_password)

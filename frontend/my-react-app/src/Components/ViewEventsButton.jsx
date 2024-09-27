@@ -10,7 +10,7 @@ export default function ViewEventsButton() {
 
   return (
     <>
-      <Button onClick={() => handleClick()} variant="contained">
+      <Button onClick={() => handleClick()} variant="contained" >
         Continue to events
       </Button>
     </>
