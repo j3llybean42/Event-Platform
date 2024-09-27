@@ -5,9 +5,9 @@ exports.fetchStaff = () => {
     return db.query(`SELECT * FROM staff;`).then((result) => result.rows)
 }
 
-exports.fetchStaffEmail = (email) => {
+exports.fetchStaffEmail = (staff_email) => {
     return db.query(`SELECT * FROM staff
-        WHERE staff_email = $1`, [email])
+        WHERE staff_email = $1`, [staff_email])
         .then((result) => {
             const staffMember = result.rows[0]
             if(!staffMember){

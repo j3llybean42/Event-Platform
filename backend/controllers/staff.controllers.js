@@ -8,8 +8,8 @@ exports.getStaff = (req, res, next) => {
 };
 
 exports.getStaffEmail = (req, res, next) => {
-  const email = req.params.email;
-  fetchStaffEmail(email)
+  const staff_email = req.params.email;
+  fetchStaffEmail(staff_email)
     .then((staffMember) => {
       res.status(200).send({ staffMember });
     })

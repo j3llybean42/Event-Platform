@@ -1,7 +1,7 @@
 import { LoadingButton } from "@mui/lab"
 import { Button, CardActions, TextField} from "@mui/material"
 
-export default function StaffPasswordEntry({handlePasswordInput, handleSubmit}) {
+export default function StaffPasswordEntry({isSubmitted, passwordInput, handlePasswordInput, handleSubmit}) {
     return(
         <>
         <TextField placeholder="Staff Password"

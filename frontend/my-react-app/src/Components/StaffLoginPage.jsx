@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { StaffContext } from "../contexts/StaffContext";
 import { getStaffEmail, getStaffPassword } from "../utils";
 import StaffChangePassword from "./StaffChangePassword";
+import StaffPasswordEntry from "./StaffPasswordEntry";
 
 export default function StaffLoginPage() {
   const { isStaff, setIsStaff } = useContext(StaffContext);
