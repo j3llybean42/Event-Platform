@@ -23,3 +23,13 @@ export function getStaffPassword(staff_email, params){
         return response.data
     })
 }
+
+export function getStaffEmail(staff_email){
+    return bookstoreAPI.get(`/staff/find/${staff_email}`).then((response) =>{
+        return response.data
+    })
+}
+
+export function patchStaffPassword(staff_id, request){
+    return bookstoreAPI.get(`/staff/${staff_id}`, request)
+}

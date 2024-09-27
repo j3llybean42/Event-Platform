@@ -7,14 +7,14 @@ exports.getStaff = (req, res, next) => {
     .catch(next);
 };
 
-// exports.getStaffEmail = (req, res, next) => {
-//   const email = req.params.email;
-//   fetchStaffEmail(email)
-//     .then((staffMember) => {
-//       res.status(200).send({ staffMember });
-//     })
-//     .catch(next);
-// };
+exports.getStaffEmail = (req, res, next) => {
+  const email = req.params.email;
+  fetchStaffEmail(email)
+    .then((staffMember) => {
+      res.status(200).send({ staffMember });
+    })
+    .catch(next);
+};
 
 exports.patchStaffPassword = (req, res, next) => {
   const {new_password} = req.body
