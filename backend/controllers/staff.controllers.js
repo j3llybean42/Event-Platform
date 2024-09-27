@@ -8,7 +8,7 @@ exports.getStaff = (req, res, next) => {
 };
 
 exports.getStaffEmail = (req, res, next) => {
-  const staff_email = req.params.email;
+  const staff_email = req.params.staff_email;
   fetchStaffEmail(staff_email)
     .then((staffMember) => {
       res.status(200).send({ staffMember });
