@@ -3,6 +3,7 @@ const cors = require("cors");
 const { badPath } = require("./controllers/app.controllers");
 const apiRouter = require("./routes/api-router");
 
+
 const app = express();
 
 app.use(cors());
