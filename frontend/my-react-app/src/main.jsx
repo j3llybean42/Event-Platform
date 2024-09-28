@@ -12,9 +12,9 @@ import "@fontsource/roboto/700.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <GoogleOAuthProvider
-  //   clientId={import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID}
-  // >
+  <GoogleOAuthProvider
+    clientId={import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID}
+  >
     <BrowserRouter>
       <UserProvider>
         <StaffProvider>
@@ -22,5 +22,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </StaffProvider>
       </UserProvider>
     </BrowserRouter>
-  // </GoogleOAuthProvider>
+   </GoogleOAuthProvider>
 );

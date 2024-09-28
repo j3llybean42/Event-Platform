@@ -17,32 +17,32 @@ const client = new OAuth2Client(GOOGLE_CLIENT_ID)
 //     }
 // }
 
-oAuthRouter.post('/login', async (req, res) => {
-    console.log(req.body)
-    const {token} = req.body
-    const ticket = await client.verifyIdToken({
-        idToken: token,
-        audience: GOOGLE_CLIENT_ID
-    })
-    console.log(ticket)
+// oAuthRouter.post('/login', async (req, res) => {
+//     console.log(req.body)
+//     const {token} = req.body
+//     const ticket = await client.verifyIdToken({
+//         idToken: token,
+//         audience: GOOGLE_CLIENT_ID
+//     })
+//     console.log(ticket)
 
-    const {name, email, picture} = ticket.getPayload()
-    const user = await db.user.upsert({
-        where: {email: email},
-        update: {name, picture},
-        create: {name, email, picture}
-    })
-    req.session.userId = user.id
+//     const {name, email, picture} = ticket.getPayload()
+//     const user = await db.user.upsert({
+//         where: {email: email},
+//         update: {name, picture},
+//         create: {name, email, picture}
+//     })
+//     req.session.userId = user.id
 
-    res.status(201)
-    res.json(user)
-})
+//     res.status(201)
+//     res.json(user)
+// })
 
-oAuthRouter.delete('/logout', async (req, res) => {
-    await req.session.destroy()
-    res.status(200)
-    res.json({message: "Logged out successfully"})
-})
+// oAuthRouter.delete('/logout', async (req, res) => {
+//     await req.session.destroy()
+//     res.status(200)
+//     res.json({message: "Logged out successfully"})
+// })
 
 // async function verifyGoogleToken(token) {
 //     try {

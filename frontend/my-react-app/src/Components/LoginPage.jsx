@@ -45,7 +45,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <Typography variant="h3">Login:</Typography>
+      <Typography variant="h5">Login:</Typography>
       <GoogleLogin onSuccess={handleLogin} onFailure={handleLogin} buttonText="" cookiePolicy={'single_host_origin'}/>
       {/* {error && <p style={{ color: "red" }}>{error}</p>}
       {loading ? (
