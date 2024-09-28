@@ -1,6 +1,5 @@
 module.exports = [
     {
-        staff_email: "staff-admin@bookstore.com",
-        staff_password: "password"
+        staff_email: "bookstore.events1@gmail.com",
     }
 ]
