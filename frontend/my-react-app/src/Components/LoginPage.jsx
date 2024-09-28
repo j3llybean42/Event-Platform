@@ -1,30 +1,58 @@
-import { useEffect } from "react"
-import useFetch from "../hooks/useFetch"
-import { Typography } from "@mui/material"
+import { useEffect } from "react";
+import useFetch from "../hooks/useFetch";
+import { Typography } from "@mui/material";
+import { GoogleLogin } from "@react-oauth/google";
 
-export default function LoginPage(){
+
+export default function LoginPage() {
+  async function handleLogin(googleData) {
     const url = import.meta.env.VITE_REACT_APP_API_URL
-    const {handleGoogle, loading, error} = useFetch(`${url}/login`)
+    const res = await fetch(`${url}/oauth/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        token: googleData.credential
+      }),
+      headers: { "Content-Type": "application/json"}
+    })
+    const data = await res.json()
+    console.log(data, "<- handleLogin data")
+    localStorage.setItem('loginData', JSON.stringify(data))
+  }
 
-    useEffect(() => {
-        if(window.google){
-            google.accounts.id.initialize({
-                client_id: import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID,
-                callback: handleGoogle
-            })
-            google.accounts.id.renderButton(document.getElementById("logindiv"), {
-                theme: "filled_black",
-                text: "signin_with",
-                shape:"pill"
-            })
-        }
-    }, [handleGoogle])
+  // const url = import.meta.env.VITE_REACT_APP_API_URL;
+  // const { handleGoogle, loading, error } = useFetch(`${url}/oauth/login`);
 
-    return(
-        <>
-            <Typography variant="h3">Login:</Typography>
-            {error && <p style={{color: "red"}}>{error}</p>}
-            {loading ? <Typography variant="body1">Loading...</Typography> : <div id="loginDiv"></div>}
-        </>
-    )
+  // function onClickHandler(){
+  //   console.log("google button clicked")
+  // }
+
+  // useEffect(() => {
+  //   if (window.google) {
+  //     google.accounts.id.initialize({
+  //       client_id: import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID,
+  //       callback: handleGoogle,
+  //     });
+  //     google.accounts.id.renderButton(document.getElementById("logindiv"), {
+  //       type: "standard",
+  //       size: "medium",
+  //       theme: "filled_black",
+  //       text: "continue_with",
+  //       shape: "rectangular",
+  //       click_listener: onClickHandler
+  //     });
+  //   }
+  // }, [handleGoogle]);
+
+  return (
+    <>
+      <Typography variant="h3">Login:</Typography>
+      <GoogleLogin onSuccess={handleLogin} onError={handleFailure} buttonText="" useOneTap cookiePolicy={'single_host_origin'}/>
+      {/* {error && <p style={{ color: "red" }}>{error}</p>}
+      {loading ? (
+        <Typography variant="body1">Loading...</Typography>
+      ) : (
+        <div id="loginDiv"></div>
+      )} */}
+    </>
+  );
 }

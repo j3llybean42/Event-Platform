@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <>
       <h1>Bookstore Events</h1>
-      {googleUser ? <Button onClick={logout} variant="outlined">Logout</Button> : null}
+      {googleUser?.email ? <Button onClick={logout} variant="outlined">Logout</Button> : null}
     </>
   );
 }
