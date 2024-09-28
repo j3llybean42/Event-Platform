@@ -18,8 +18,10 @@ import { useState } from "react";
 import { postEvent } from "../utils";
 import { LoadingButton } from "@mui/lab";
 import EventSubmitButton from "./EventSubmitButton";
+import { useNavigate } from "react-router-dom";
 
 export default function EventAdder({ setEventsList }) {
+  const navigate = useNavigate()
   const [nameInput, setNameInput] = useState("");
   const [dateInput, setDateInput] = useState("");
   const [timeInput, setTimeInput] = useState("");
@@ -69,6 +71,10 @@ export default function EventAdder({ setEventsList }) {
 
   function handleAttendeeInput(event, value) {
     setMaxAttendeeInput(value);
+  }
+
+  function handleBackClick(){
+    navigate("/events")
   }
 
   function handleSubmit() {
@@ -272,7 +278,8 @@ export default function EventAdder({ setEventsList }) {
           {success ? (<Typography sx={{ fontSize: 12, lineHeight: 1 }}>
               Event Added!
             </Typography>) : null}
-            {success ? (<Button variant="contained" href="/events">Back to Events</Button>) : null}
+            <br/>
+            {success ? (<Button variant="contained" onClick={handleBackClick}>Back to Events</Button>) : null}
         </Box>
       </Card>
     </>

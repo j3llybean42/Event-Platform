@@ -6,24 +6,27 @@ import { useEffect, useState, useContext } from "react";
 import LoginPage from "./LoginPage";
 import { UserContext } from "../contexts/UserContext";
 import Secure from "./Secure";
+import { StaffContext } from "../contexts/StaffContext";
+import { getEvents } from "../utils"
 
-export default function Manager() {
+export default function Manager({userDetails, setUserDetails}) {
   const [eventsList, setEventsList] = useState([])
   const {googleUser, setGoogleUser} = useContext(UserContext)
+  const {isStaff} = useContext(StaffContext)
 
-  useEffect(()  => {
-    const theUser = localStorage.getItem("user")
-
-    if(theUser && !theUser.includes("undefined")){
-      setGoogleUser(JSON.parse(theUser))
-    }
-  }, [])
+  useEffect(() => {
+    console.log(isStaff, "<- isStaff MANAGER")
+    getEvents().then((data) => {
+        const {events} = data
+        setEventsList(events)
+    })
+}, [])
 
   return (
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/secure" element={<Secure/>}/>
+        <Route path="/secure" element={<Secure userDetails={userDetails} setUserDetails={setUserDetails}/>}/>
         <Route path="/events" element={<EventsPage eventsList={eventsList} setEventsList={setEventsList}/>}/>
         <Route path="/events/addevent" element={<EventAdder setEventsList={setEventsList}/>}/>
       </Routes>

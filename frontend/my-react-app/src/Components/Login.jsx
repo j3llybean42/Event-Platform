@@ -4,38 +4,34 @@ import Cookies from "js-cookie";
 import { Button, Typography } from "@mui/material";
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  function handleClick() {
-    const callbackUrl = `${window.location.origin}`;
-    const googleClientId = import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID;
-    const targetUrl = `https://accounts.google.com/o/oauth2/auth?redirect_uri=${encodeURIComponent(
-      callbackUrl
-    )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;
-    window.location.href = targetUrl
-  }
-
-  useEffect(() => {
-    const accessTokenRegex = /access_token=([^&]+)/
-    const isMatch = window.location.href.match(accessTokenRegex)
-
-    if(isMatch){
-        const accessToken = isMatch[1]
-        Cookies.set("access_token", accessToken, {
-            secure: true,
-            httpOnly: true,
-            expires: 1
-        })
-        setIsLoggedIn(true)
+    const handleClick = () => {
+        const callbackUrl = `${window.location.origin}`
+        const googleClientId = `${import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID}`
+        const targetUrl = `https://accounts.google.com/o/oauth2/auth?redirect_uri=${encodeURIComponent(callbackUrl)}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`
+        window.location.href = targetUrl
     }
-  }, [])
 
-  useEffect(() => {
-    if(isLoggedIn){
-        navigate("/secure")
-    }
-  }, [isLoggedIn, navigate])
+    useEffect(() => {
+        const accessTokenRegex = /access_token=([^&]+)/;
+        const isMatch = window.location.href.match(accessTokenRegex)
+
+        if(isMatch) {
+            const accessToken = isMatch[1]
+            Cookies.set("access_token", accessToken, {
+                secure: true
+            })
+            setIsLoggedIn(true)
+        }
+    }, []);
+
+    useEffect(() => {
+        if(isLoggedIn){
+            navigate("/secure")
+        }
+    }, [isLoggedIn, navigate])
 
   return(
     <>

@@ -6,7 +6,7 @@ export default function EventCard({event}){
 
     return(
         <>
-            <Card variant="outlined">
+            <Card>
                 <CardContent>
                     <Typography gutterBottom variant="h5">{event.event_name}</Typography>
                     <Typography variant="body1" color="text-secondary">{event.event_description}</Typography>

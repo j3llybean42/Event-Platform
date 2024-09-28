@@ -1,28 +1,26 @@
 import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../contexts/UserContext"
 import {StaffContext} from "../contexts/StaffContext"
-import { getEvents } from "../utils"
 import EventCard from "./EventCard"
 import { Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 export default function EventsPage({eventsList, setEventsList}){
+    const navigate = useNavigate()
     const {isStaff} = useContext(StaffContext)
     
-    useEffect(() => {
-        getEvents().then((data) => {
-            const {events} = data
-            setEventsList(events)
-        })
-    }, [])
+    
 
+    function handleClick(){
+        navigate("/events/addevent")
+    }
 
     return(
-        <section>
+        <>
         <h2>Upcoming Events:</h2>
-        {isStaff ? (<Button href={"/events/addevent"} variant="outlined">Add new event</Button>) : null }
-        {eventsList.map((event) => {
-            return <EventCard key={event.event_id} event={event}/>
+        {isStaff ? (<Button onClick={handleClick} variant="outlined">Add new event</Button>) : null }
+        {eventsList.map((event, index) => {
+            return <EventCard key={index} event={event}/>
         })}
-        </section>
+        </>
     )
 }

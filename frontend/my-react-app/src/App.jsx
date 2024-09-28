@@ -7,9 +7,10 @@ import { StaffContext } from "./contexts/StaffContext.jsx";
 import { UserContext } from "./contexts/UserContext.jsx";
 
 function App() {
-  const {isStaff, setIsStaff} = useContext(StaffContext)
   const {googleUser, setGoogleUser} = useContext(UserContext)
+  const {isStaff, setIsStaff} = useContext(StaffContext)
   const [staffList, setStaffList] = useState([]);
+  const [userDetails, setUserDetails] = useState({})
 
   const getStaffDetails = async () => {
     const data = await getStaff()
@@ -17,22 +18,40 @@ function App() {
         const staffDetails = staff.map((element) => {
           return element.staff_email
         })
-        setStaffList(staffDetails)
+        setStaffList((staffList) => staffList = staffDetails)
   }
 
   useEffect(() => {
+    const isStaffInfo = window.localStorage.getItem('bookstore_isStaff')
+
+    if(isStaffInfo !== null){
+      setIsStaff(JSON.parse(isStaffInfo))
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('bookstore_isStaff', JSON.stringify(isStaff))
+  }, [isStaff]);
+
+
+  useEffect(() => {
+    setGoogleUser(userDetails.email)
+    console.log(googleUser, "<- googleUser start useEffect")
+    console.log(userDetails, "<- userDetails start useEffect")
     getStaffDetails()
       .then(() => {
-        if (staffList.includes(googleUser.email)) {
-          setIsStaff(true);
+        console.log(staffList, "<- staffList useEffect")
+        if (staffList.includes(googleUser)) {
+          setIsStaff((isStaff) => (isStaff = true));
         }
+        console.log(isStaff, "<- isStaff useEffect")
       })
-  }, [googleUser, isStaff])
+  }, [userDetails])
 
   return (
     <>
       <Header />
-      <Manager />
+      <Manager userDetails={userDetails} setUserDetails={setUserDetails}/>
     </>
   );
 }
