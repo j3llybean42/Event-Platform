@@ -5,7 +5,7 @@ export default function EventSubmitButton({handleSubmit}){
         <>
             <Tooltip title="Required fields are still empty!">
                 <span>
-                <Button variant="contained" onClick={handleSubmit}>
+                <Button variant="contained" size="small" onClick={handleSubmit}>
                 Submit Event
               </Button>
                 </span>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Login() {
     const navigate = useNavigate()

@@ -36,15 +36,11 @@ function App() {
 
   useEffect(() => {
     setGoogleUser(userDetails.email)
-    console.log(googleUser, "<- googleUser start useEffect")
-    console.log(userDetails, "<- userDetails start useEffect")
     getStaffDetails()
       .then(() => {
-        console.log(staffList, "<- staffList useEffect")
         if (staffList.includes(googleUser)) {
           setIsStaff((isStaff) => (isStaff = true));
         }
-        console.log(isStaff, "<- isStaff useEffect")
       })
   }, [userDetails])
 

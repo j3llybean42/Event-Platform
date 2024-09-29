@@ -9,15 +9,29 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000f00',
+      contrastText: '#f1ead8',
+    },
+    secondary: {
+      main: '#bec5a4',
+      contrastText: '#242715',
+    },
+  }
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  
-    <BrowserRouter>
-      <UserProvider>
-        <StaffProvider>
+  <BrowserRouter>
+    <UserProvider>
+      <StaffProvider>
+        <ThemeProvider theme={theme}>
           <App />
-        </StaffProvider>
-      </UserProvider>
-    </BrowserRouter>
+        </ThemeProvider>
+      </StaffProvider>
+    </UserProvider>
+  </BrowserRouter>
 );

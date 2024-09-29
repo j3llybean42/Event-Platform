@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { UserContext } from "../contexts/UserContext";
@@ -22,8 +22,6 @@ export default function Secure({userDetails, setUserDetails}) {
         }
 
         getUserDetails(accessToken)
-        console.log(userDetails, "<- userDetails Secure")
-        console.log(googleUser, "<- googleUser Secure")
     }, [navigate, googleUser])
 
   return (

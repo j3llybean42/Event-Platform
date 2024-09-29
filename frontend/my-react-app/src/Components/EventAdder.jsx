@@ -13,6 +13,7 @@ import {
   Slider,
   CardActions,
   Button,
+  listItemSecondaryActionClasses,
 } from "@mui/material";
 import { useState } from "react";
 import { postEvent } from "../utils";
@@ -133,10 +134,10 @@ export default function EventAdder({ setEventsList }) {
   return (
     <>
       <Typography variant="h5">Add a new event</Typography>
-      <Card>
+      <Card sx={{bgcolor: 'secondary.light', color:'black'}}>
         <Box sx={{ width: 800 }} component="form">
           <Typography
-            sx={{ padding: 2 }}
+            sx={{ margin: 2,  color: 'black' }}
             id="event-details"
             variant="h6"
             gutterBottom
@@ -145,7 +146,7 @@ export default function EventAdder({ setEventsList }) {
           </Typography>
           <TextField
             placeholder="Event Name"
-            sx={{ width: 400, paddingBottom: 2 }}
+            sx={{ width: 400, color: 'black', marginBottom: 2 }}
             id="event_name"
             label="Event Name"
             variant="outlined"
@@ -158,7 +159,7 @@ export default function EventAdder({ setEventsList }) {
           />
           <br />
           <TextField
-            sx={{ paddingBottom: 2, paddingRight: 2 }}
+            sx={{ marginBottom: 2, marginRight: 2, color: 'black' }}
             type="date"
             id="event_date"
             label="Event Date"
@@ -171,7 +172,7 @@ export default function EventAdder({ setEventsList }) {
             InputLabelProps={{ shrink: true }}
           />
           <TextField
-            sx={{ paddingBottom: 2 }}
+            sx={{ marginBottom: 2, color: 'black' }}
             type="time"
             id="event_time"
             label="Event Time"
@@ -185,9 +186,9 @@ export default function EventAdder({ setEventsList }) {
           />
           <br />
           <FormControl variant="standard">
-            <FormLabel id="event_type_radio_label">Event Type</FormLabel>
+            <FormLabel id="event_type_radio_label" sx={{color: "black"}}>Event Type:</FormLabel>
             <RadioGroup
-              sx={{ paddingBottom: 2 }}
+              sx={{ marginBottom: 2, color: 'black' }}
               row
               aria-labelledby="event_type_radio"
               defaultValue="general"
@@ -197,18 +198,21 @@ export default function EventAdder({ setEventsList }) {
               }}
             >
               <FormControlLabel
+              sx={{color: 'black'}}
                 value="general"
-                control={<Radio />}
+                control={<Radio sx={{color: 'black'}}/>}
                 label="General"
               />
               <FormControlLabel
+              sx={{color: 'black'}}
                 value="children's"
-                control={<Radio />}
+                control={<Radio sx={{color: 'black'}}/>}
                 label="Children's"
               />
               <FormControlLabel
+              sx={{color: 'black'}}
                 value="games"
-                control={<Radio />}
+                control={<Radio sx={{color: 'black'}}/>}
                 label="Games"
               />
             </RadioGroup>
@@ -216,7 +220,7 @@ export default function EventAdder({ setEventsList }) {
           <br />
           <TextField
             multiline
-            sx={{ width: 600, paddingBottom: 2 }}
+            sx={{ width: 600, marginBottom: 2, color: 'black' }}
             rows={3}
             id="event_description"
             label="Event Description"
@@ -231,10 +235,11 @@ export default function EventAdder({ setEventsList }) {
           />
           <br />
           <FormControl variant="standard">
-            <FormGroup sx={{ paddingBottom: 2 }}>
+            <FormGroup sx={{ marginBottom: 2, color: 'black' }}>
               <FormControlLabel
                 control={
                   <Switch
+                  sx={{color: 'black'}}
                     checked={checked}
                     onChange={(event) => {
                       handleFreeSwitch(event.target.checked);
@@ -247,11 +252,11 @@ export default function EventAdder({ setEventsList }) {
             </FormGroup>
           </FormControl>
           <br />
-          <Typography id="attendees-input-slider" gutterBottom>
+          <Typography id="attendees-input-slider" sx={{color: 'black'}} gutterBottom>
             Number of spaces available:
           </Typography>
           <Slider
-            sx={{ width: 300, paddingBottom: 2 }}
+            sx={{ width: 300, marginBottom: 2, color: 'black' }}
             marks={marks}
             defaultValue={20}
             step={5}
@@ -275,11 +280,11 @@ export default function EventAdder({ setEventsList }) {
               {error}
             </Typography>
           ) : null}
-          {success ? (<Typography sx={{ fontSize: 12, lineHeight: 1 }}>
+          {success ? (<Typography sx={{ fontSize: 14, lineHeight: 1 }}>
               Event Added!
             </Typography>) : null}
             <br/>
-            {success ? (<Button variant="contained" onClick={handleBackClick}>Back to Events</Button>) : null}
+            {success ? (<Button variant="contained" size="small" onClick={handleBackClick}>Back to Events</Button>) : null}
         </Box>
       </Card>
     </>

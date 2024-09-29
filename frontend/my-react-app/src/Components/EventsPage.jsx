@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext} from "react"
 import {StaffContext} from "../contexts/StaffContext"
 import EventCard from "./EventCard"
 import { Button } from "@mui/material"
@@ -17,7 +17,7 @@ export default function EventsPage({eventsList, setEventsList}){
     return(
         <>
         <h2>Upcoming Events:</h2>
-        {isStaff ? (<Button onClick={handleClick} variant="outlined">Add new event</Button>) : null }
+        {isStaff ? (<Button onClick={handleClick} variant="contained" size="small" className="button-right">Add new event</Button>) : null }
         {eventsList.map((event, index) => {
             return <EventCard key={index} event={event}/>
         })}

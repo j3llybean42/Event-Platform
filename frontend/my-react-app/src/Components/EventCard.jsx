@@ -43,14 +43,11 @@ export default function EventCard({ event }) {
 
     return eventDateObj;
   }
-
-  console.log(formatEventDate(eventDate), "<-formatEventDate");
   const eventDateObj = formatEventDate(eventDate);
-  console.log(eventDateObj);
 
   return (
     <>
-      <Card>
+      <Card sx={{maxWidth: 700, bgcolor: 'secondary.light', marginTop: 2}}>
         <CardContent>
           <Typography gutterBottom variant="h5">
             {event.event_name}
@@ -62,7 +59,7 @@ export default function EventCard({ event }) {
           <Typography variant="body2">{date}</Typography>
         </CardContent>
         <CardActions>
-          <AddToCalendarButton
+          <AddToCalendarButton 
             name={event.event_name}
             startDate={eventDateObj.start_date}
             startTime={eventDateObj.start_time}
@@ -72,6 +69,7 @@ export default function EventCard({ event }) {
             label="Add to Google Calendar"
             lightMode="dark"
             hideCheckmark={true}
+            size="2"
           ></AddToCalendarButton>
         </CardActions>
       </Card>

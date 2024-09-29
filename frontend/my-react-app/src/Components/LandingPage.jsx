@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import Login from "./Login";
 
 export default function LandingPage() {
