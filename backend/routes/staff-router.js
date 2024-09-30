@@ -4,7 +4,5 @@ const staffRouter = require("express").Router()
 
 staffRouter.route("/").get(getStaff)
 staffRouter.route("/find/:staff_email").get(getStaffEmail)
-staffRouter.route("/:staff_email").get(getStaffPassword)
-staffRouter.route("/:staff_id").patch(patchStaffPassword)
 
 module.exports = staffRouter
